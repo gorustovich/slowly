@@ -17,6 +17,6 @@ jobs:
       - name: Test
         run: make test
       - name: Start app
-        run: docker-compose up -d
+        run: docker build -t slowly . && docker run -d -p 8080:8080 slowly
       - name: Integration test
         run: make test-integration
