@@ -1,4 +1,8 @@
-.PHONY: test test-integration
+.PHONY: build test test-integration
+
+build:
+	@echo "Building binary unit"
+	@go build -o slowly main.go
 
 test:
 	@echo "Testing unit"
