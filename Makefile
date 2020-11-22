@@ -1,7 +1,7 @@
 .PHONY: build test test-integration
 
 build:
-	@echo "Building binary unit"
+	@echo "Building binary"
 	@go build -o slowly main.go
 
 test:
