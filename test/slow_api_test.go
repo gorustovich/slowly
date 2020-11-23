@@ -34,7 +34,7 @@ func TestSlowApi(t *testing.T) {
 		assert.Equal(t, "ok", r.Status)
 	})
 
-	t.Run("timeout 5001 __ ok", func(t *testing.T) {
+	t.Run("timeout 5001 __ too long", func(t *testing.T) {
 		t.Parallel()
 		r, err := cl.SlowApiPost(5001)
 		require.NoError(t, err)
@@ -50,7 +50,7 @@ func TestSlowApi(t *testing.T) {
 		assert.Equal(t, "timeout too long", r.Error)
 	})
 
-	t.Run("timeout -1000 __ too long", func(t *testing.T) {
+	t.Run("timeout -1000 __ negative not allowed", func(t *testing.T) {
 		t.Parallel()
 		r, err := cl.SlowApiPost(-1000)
 		require.NoError(t, err)
