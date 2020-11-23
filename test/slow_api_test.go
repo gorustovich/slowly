@@ -26,17 +26,17 @@ func TestSlowApi(t *testing.T) {
 		assert.Equal(t, "ok", r.Status)
 	})
 
-	t.Run("timeout 5000 __ ok", func(t *testing.T) {
+	t.Run("timeout 4950 __ ok", func(t *testing.T) {
 		t.Parallel()
-		r, err := cl.SlowApiPost(5000)
+		r, err := cl.SlowApiPost(4950)
 		require.NoError(t, err)
 		assert.Equal(t, http.StatusOK, r.Code)
 		assert.Equal(t, "ok", r.Status)
 	})
 
-	t.Run("timeout 5001 __ too long", func(t *testing.T) {
+	t.Run("timeout 5050 __ too long", func(t *testing.T) {
 		t.Parallel()
-		r, err := cl.SlowApiPost(5001)
+		r, err := cl.SlowApiPost(5050)
 		require.NoError(t, err)
 		assert.Equal(t, http.StatusBadRequest, r.Code)
 		assert.Equal(t, "timeout too long", r.Error)

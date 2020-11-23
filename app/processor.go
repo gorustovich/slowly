@@ -5,7 +5,7 @@ import (
 	"errors"
 )
 
-const limitTimeout = time.Second * 5
+var OnlyPositiveTimeoutErr = errors.New("only positive timeout is allowed")
 
 type SlowProcessor interface {
 	Process(timeout time.Duration) error
@@ -18,16 +18,9 @@ func NewSlowProcessor() *slowProcessor {
 type slowProcessor struct{}
 
 func (sp *slowProcessor) Process(timeout time.Duration) error {
-	if isOverlimit(timeout) {
-		return errors.New("timeout too long")
-	}
 	if timeout < 0 {
-		return errors.New("only positive timeout is allowed")
+		return OnlyPositiveTimeoutErr
 	}
 	time.Sleep(timeout)
 	return nil
-}
-
-func isOverlimit(timeout time.Duration) bool {
-	return timeout > limitTimeout
 }

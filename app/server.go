@@ -21,7 +21,9 @@ func (a *Server) Setup() {
 
 	a.mux.Handle("/api/slow",
 		ValidateJsonType(
-			NewSlowHandler(slowProcessor),
+			CancelTooLong(
+				NewSlowHandler(slowProcessor),
+			),
 		),
 	)
 }
